@@ -54,11 +54,11 @@ function handleRender( req, res ) {
 		const finalState = store.getState();
 
 		// Send the rendered page back to the client
-		res.send( renderFulPage( html, finalState ));
+		res.send( renderFullPage( html, finalState ));
 	})
 };
 
-function renderFulPage( html, preloadedState ) {
+function renderFullPage( html, preloadedState ) {
 	return `
 	<!docutype html>
 	<html>
