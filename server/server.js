@@ -22,7 +22,7 @@ const port = 3000;
 const compiler = webpack( webpackConfig );
 app.use(webpackDevMiddleware( compiler, {
 		noInfo: true,
-		publichPath: webpackConfig.output.publichPath
+		publicPath: webpackConfig.output.publicPath
 	})
 );
 app.use(webpackHotMiddleware(compiler));
