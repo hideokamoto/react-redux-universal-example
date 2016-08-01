@@ -30,7 +30,11 @@ app.use(webpackHotMiddleware(compiler));
 // Add Dummy API Path
 app.get('/api/counts', function (req, res, next) {
   var num = Math.floor( Math.random() * (100 - 0 )) + 0;
-  res.send(num.toString());
+  res.json([
+    {id: 1, value: num},
+    {id: 2, value: num + 1},
+    {id: 3, value: num + num}
+  ]);
 });
 
 // This is fired every time the server side receives a request
