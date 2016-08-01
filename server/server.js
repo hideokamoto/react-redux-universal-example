@@ -27,6 +27,12 @@ app.use(webpackDevMiddleware( compiler, {
 );
 app.use(webpackHotMiddleware(compiler));
 
+// Add Dummy API Path
+app.get('/api/counts', function (req, res, next) {
+  var num = Math.floor( Math.random() * (100 - 0 )) + 0;
+  res.send(num.toString());
+});
+
 // This is fired every time the server side receives a request
 app.use(handleRender);
 
