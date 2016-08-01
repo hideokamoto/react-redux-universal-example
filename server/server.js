@@ -10,9 +10,10 @@ import webpackConfig from '../webpack.config';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
+import { match, RouterContext } from 'react-router';
 
+import routes from './route';
 import configureStore from '../common/store/configureStore';
-import App from '../common/containers/App';
 import { fetchCounter } from '../common/api/counter';
 
 const app = new Express();
@@ -41,31 +42,41 @@ app.get('/api/counts', function (req, res, next) {
 app.use(handleRender);
 
 function handleRender( req, res ) {
-	// Query out mock API asynchronously
-	fetchCounter( apiResult => {
-		// Read the counter from the request, if provided
-		const params = qs.parse(req.query);
-		const counter = parseInt(params.counter,10) || apiResult || 0;
+	match({ routes, location:req.url}, (error,redirectLocation, renderProps) => {
+		if(error) {
+			res.status(500).send(error.message);
+		} else if (redirectLocation) {
+			res.redirect(302, redirectLocation.pathname + redirectLocation.search);
+		} else if (renderProps){
+			// Query out mock API asynchronously
+			fetchCounter( apiResult => {
+				// Read the counter from the request, if provided
+				const params = qs.parse(req.query);
+				const counter = parseInt(params.counter,10) || apiResult || 0;
 
-		// Compile an initial state
-		const preloadedState = { counter };
+				// Compile an initial state
+				const preloadedState = { counter };
 
-		// Create a new redux store instance
-		const store = configureStore(preloadedState);
+				// Create a new redux store instance
+				const store = configureStore(preloadedState);
 
-		// Render the component to a string
-		const html = renderToString(
-			<Provider store={store}>
-				<App />
-			</Provider>
-		);
+				// Render the component to a string
+				const html = renderToString(
+					<Provider store={store}>
+						<RouterContext {...renderProps} />
+					</Provider>
+				);
 
-		// Grab the initial state from out Refux store
-		const finalState = store.getState();
+				// Grab the initial state from out Refux store
+				const finalState = store.getState();
 
-		// Send the rendered page back to the client
-		res.send( renderFullPage( html, finalState ));
-	})
+				// Send the rendered page back to the client
+				res.send( renderFullPage( html, finalState ));
+			});
+		} else {
+			res.status(404).send('not found');
+		}
+	});
 };
 
 function renderFullPage( html, preloadedState ) {
