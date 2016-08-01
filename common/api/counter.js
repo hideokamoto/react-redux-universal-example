@@ -8,7 +8,6 @@ function fetchData( api ) {
 }
 
 export function fetchCounter(callback) {
-
 	fetchData('http://localhost:3000/api/counts')
 	  .then( res => {
 		  if ( res.status >= 400 ) {
@@ -24,10 +23,5 @@ export function fetchCounter(callback) {
 	  .catch( error => {
 		  console.log(error);
 		  throw error;
-	  })
-
-
-	// In the case of a real world API call,
-	// you'll normally run into a Promise like this:
-	// API.getUser().then(user=>callback(user));
+	  });
 }
