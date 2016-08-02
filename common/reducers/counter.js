@@ -4,6 +4,8 @@ export default function counter( state = 0, action ) {
 	var num = 0;
 	if ( state.posts ) {
 		num = state.posts[0].id;
+	} else {
+		num = state;
 	}
 	switch(action.type) {
 		case SET_COUNTER:
