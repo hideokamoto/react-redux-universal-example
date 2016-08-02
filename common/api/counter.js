@@ -20,7 +20,7 @@ export function fetchCounter(callback) {
 		  returnData = {
 			  counts: data
 		  };
-		  fetchPosts( returnData, callback );
+		  fetchRoot( returnData, callback );
 	  })
 	  .catch( error => {
 		  console.log(error);
@@ -45,5 +45,23 @@ function fetchPosts( returnData, callback ) {
 		  console.log(error);
 		  throw error;
 	  });
+}
 
+function fetchRoot( returnData, callback ) {
+	fetchData('http://api.wp-app.org/wp-json/')
+	  .then( res => {
+		  if ( res.status >= 400 ) {
+			  console.log(res);
+			  throw new Error('Bad request');
+		  }
+		  return res.json();
+	  })
+	  .then( data => {
+		  returnData = Object.assign( returnData, { siteRoot: data } );
+		  fetchPosts( returnData, callback );
+	  })
+	  .catch( error => {
+		  console.log(error);
+		  throw error;
+	  });
 }

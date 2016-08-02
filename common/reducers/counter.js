@@ -1,17 +1,18 @@
 import { SET_COUNTER, INCREMENT_COUNTER, DECREMENT_COUNTER } from '../actions';
 
 export default function counter( state = 0, action ) {
+	var num = 0;
 	if ( state.posts ) {
-		state = state.posts[0].id;
+		num = state.posts[0].id;
 	}
 	switch(action.type) {
 		case SET_COUNTER:
 			return action.payload;
 		case INCREMENT_COUNTER:
-			return state + 1;
+			return num + 1;
 		case DECREMENT_COUNTER:
-			return state - 1;
+			return num - 1;
 		default:
-			return state;
+			return num;
 	}
 }

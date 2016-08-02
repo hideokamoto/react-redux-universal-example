@@ -6,9 +6,11 @@ export default class RouterLayout extends Component {
 	}
 
 	render() {
+		const { siteRoot } = this.props;
 		return (
 			<div>
-				<h1>This is Router Example</h1>
+				<h1>{siteRoot.name}</h1>
+				<p>{siteRoot.description}</p>
 				{this.props.children}
 			</div>
 		)

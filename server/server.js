@@ -53,9 +53,10 @@ function handleRender( req, res ) {
 				// Read the counter from the request, if provided
 				const params = qs.parse(req.query);
 				const counter = parseInt(params.counter,10) || apiResult || 0;
-
+				const postList = apiResult.posts;
+				const siteRoot = apiResult.siteRoot;
 				// Compile an initial state
-				const preloadedState = { counter };
+				const preloadedState = { counter, postList, siteRoot };
 
 				// Create a new redux store instance
 				const store = configureStore(preloadedState);
