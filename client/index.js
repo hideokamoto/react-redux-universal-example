@@ -6,17 +6,24 @@ import { Router, hashHistory, match, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
 import configureStore from '../common/store/configureStore';
-import routes from '../server/route';
 
 const preloadState = window.__PRELOADED_STATE__;
-const store = configureStore(preloadState);
-const rootElement = document.getElementById('app');
+
+const sample = {
+	postList: 1178
+}
+import App from '../common/containers/App';
+import ClientRoot from './route';
+
+const mergedState = Object.assign( preloadState, sample );
+const store = configureStore(mergedState);
+const rootElement = document.getElementById('client');
 var history = syncHistoryWithStore(browserHistory, store);
 
-match({history, routes}, (error,redirectLocation,renderProps) => {
+match({history, ClientRoot}, (error,redirectLocation,renderProps) => {
 	render(
 		<Provider store={store}>
-			<Router history={hashHistory} routes={routes}>
+			<Router history={hashHistory} routes={ClientRoot}>
 			</Router>
 		</Provider>,
 		rootElement

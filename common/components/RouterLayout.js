@@ -12,6 +12,7 @@ export default class RouterLayout extends Component {
 				<h1>{siteRoot.name}</h1>
 				<p>{siteRoot.description}</p>
 				{this.props.children}
+				<div id='client'></div>
 			</div>
 		)
 	}
