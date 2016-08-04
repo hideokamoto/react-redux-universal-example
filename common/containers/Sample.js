@@ -4,9 +4,7 @@ import Sample from '../components/Sample';
 import * as CounterActions from '../actions';
 
 function mapStateToProps(state) {
-	return {
-		counter: state.counter
-	};
+	return {};
 }
 
 function mapDispatchToProps(dispatch) {

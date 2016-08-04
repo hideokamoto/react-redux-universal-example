@@ -14,7 +14,7 @@ import { match, RouterContext } from 'react-router';
 
 import routes from './route';
 import configureStore from '../common/store/configureStore';
-import { fetchCounter } from '../common/api/counter';
+import { fetchApi } from '../common/api/counter';
 
 const app = new Express();
 const port = 3000;
@@ -49,7 +49,8 @@ function handleRender( req, res ) {
 			res.redirect(302, redirectLocation.pathname + redirectLocation.search);
 		} else if (renderProps){
 			// Query out mock API asynchronously
-			fetchCounter( apiResult => {
+			fetchApi( renderProps.params, apiResult => {
+				console.log(apiResult);
 				// Read the counter from the request, if provided
 				const params = qs.parse(req.query);
 				const counter = parseInt(params.counter,10) || apiResult || 0;

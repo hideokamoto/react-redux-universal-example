@@ -7,7 +7,18 @@ function fetchData( api ) {
 	return fetch(api);
 }
 var returnData = [];
-export function fetchCounter(callback) {
+export function fetchApi( params, callback) {
+	console.log(params);
+	if ( ! params.slug ) {
+		console.log('this is root page');
+		fetchRoot( callback );
+	} else {
+		console.log('this is child page');
+		fetchPosts( callback );
+	}
+}
+
+function fetchCounter( callback ) {
 	fetchData('http://localhost:3000/api/counts')
 	  .then( res => {
 		  if ( res.status >= 400 ) {
@@ -24,11 +35,11 @@ export function fetchCounter(callback) {
 	  })
 	  .catch( error => {
 		  console.log(error);
-		  throw error;
+		  callback(false);
 	  });
 }
 
-function fetchPosts( returnData, callback ) {
+function fetchPosts( callback ) {
 	fetchData('http://api.wp-app.org/wp-json/wp/v2/posts')
 	  .then( res => {
 		  if ( res.status >= 400 ) {
@@ -39,7 +50,7 @@ function fetchPosts( returnData, callback ) {
 	  })
 	  .then( data => {
 		  returnData = Object.assign( returnData, {posts: data } );
-		  callback(returnData);
+		  fetchRoot( callback, returnData );
 	  })
 	  .catch( error => {
 		  console.log(error);
@@ -47,7 +58,7 @@ function fetchPosts( returnData, callback ) {
 	  });
 }
 
-function fetchRoot( returnData, callback ) {
+function fetchRoot( callback, returnData = {} ) {
 	fetchData('http://api.wp-app.org/wp-json/')
 	  .then( res => {
 		  if ( res.status >= 400 ) {
@@ -58,7 +69,7 @@ function fetchRoot( returnData, callback ) {
 	  })
 	  .then( data => {
 		  returnData = Object.assign( returnData, { siteRoot: data } );
-		  fetchPosts( returnData, callback );
+		  callback( returnData, callback );
 	  })
 	  .catch( error => {
 		  console.log(error);
