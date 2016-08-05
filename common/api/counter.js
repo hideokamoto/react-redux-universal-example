@@ -6,6 +6,7 @@ function getRandomInt(min,max) {
 function fetchData( api ) {
 	return fetch(api);
 }
+
 var returnData = [];
 export function fetchApi( params, callback) {
 	console.log(params);
@@ -14,7 +15,7 @@ export function fetchApi( params, callback) {
 		fetchRoot( callback );
 	} else {
 		console.log('this is child page');
-		fetchPosts( callback );
+		fetchPost( callback, params.slug );
 	}
 }
 
@@ -39,8 +40,10 @@ function fetchCounter( callback ) {
 	  });
 }
 
-function fetchPosts( callback ) {
-	fetchData('http://api.wp-app.org/wp-json/wp/v2/posts')
+function fetchPost( callback, slug ) {
+	console.log(slug);
+	var api = 'http://api.wp-app.org/wp-json/wp/v2/posts?slug=' + slug;
+	fetchData(api)
 	  .then( res => {
 		  if ( res.status >= 400 ) {
 			  console.log(res);
@@ -49,12 +52,19 @@ function fetchPosts( callback ) {
 		  return res.json();
 	  })
 	  .then( data => {
-		  returnData = Object.assign( returnData, {posts: data } );
+		  if ( ! data[0] ) {
+		  	throw new Error('Page not found');
+		  }
+		  returnData = {
+			  posts: data
+		  };
 		  fetchRoot( callback, returnData );
 	  })
 	  .catch( error => {
-		  console.log(error);
-		  throw error;
+		  returnData = {
+			  posts: error
+		  }
+		  fetchRoot( callback, returnData );
 	  });
 }
 

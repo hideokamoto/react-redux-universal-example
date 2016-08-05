@@ -10,6 +10,5 @@ export default (
 	<Route path='/' component={ClientLayout}>
 		<Route path='/sample' component={Sample} />
 		<Route path='/:slug' component={Post} />
-		<IndexRoute component={App} />
 	</Route>
 );

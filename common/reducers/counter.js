@@ -2,7 +2,9 @@ import { SET_COUNTER, INCREMENT_COUNTER, DECREMENT_COUNTER } from '../actions';
 
 export default function counter( state = 0, action ) {
 	var num = 0;
-	if ( state.posts ) {
+	if ( state.posts instanceof Error ) {
+		num = state;
+	} else if ( state.posts ) {
 		num = state.posts[0].id;
 	} else {
 		num = state;
