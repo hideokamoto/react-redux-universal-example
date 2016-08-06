@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import conf from '../config';
 
 function getRandomInt(min,max) {
 	return Math.floor( Math.random() * (max - min )) + min;
@@ -8,8 +9,7 @@ function fetchData( api ) {
 }
 
 var returnData = [];
-export function fetchApi( params, callback) {
-	console.log(params);
+export function fetchApi( params, callback ) {
 	if ( ! params.slug ) {
 		console.log('this is root page');
 		fetchRoot( callback );
@@ -19,30 +19,8 @@ export function fetchApi( params, callback) {
 	}
 }
 
-function fetchCounter( callback ) {
-	fetchData('http://localhost:3000/api/counts')
-	  .then( res => {
-		  if ( res.status >= 400 ) {
-			  console.log(res);
-			  throw new Error('Bad request');
-		  }
-		  return res.json();
-	  })
-	  .then( data => {
-		  returnData = {
-			  counts: data
-		  };
-		  fetchRoot( returnData, callback );
-	  })
-	  .catch( error => {
-		  console.log(error);
-		  callback(false);
-	  });
-}
-
 function fetchPost( callback, slug ) {
-	console.log(slug);
-	var api = 'http://api.wp-app.org/wp-json/wp/v2/posts?slug=' + slug;
+	var api =  conf.api + 'wp/v2/posts?slug=' + slug;
 	fetchData(api)
 	  .then( res => {
 		  if ( res.status >= 400 ) {
@@ -69,7 +47,7 @@ function fetchPost( callback, slug ) {
 }
 
 function fetchRoot( callback, returnData = {} ) {
-	fetchData('http://api.wp-app.org/wp-json/')
+	fetchData( conf.api )
 	  .then( res => {
 		  if ( res.status >= 400 ) {
 			  console.log(res);
