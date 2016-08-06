@@ -48,10 +48,10 @@ function handleRender( req, res ) {
 				// Read the counter from the request, if provided
 				const params = qs.parse(req.query);
 				const counter = parseInt(params.counter,10) || apiResult || 0;
-				//const postList = apiResult.posts;
+				const postList = apiResult.posts;
 				const siteRoot = apiResult.siteRoot;
 				// Compile an initial state
-				const preloadedState = { counter, siteRoot };
+				const preloadedState = { siteRoot, postList };
 
 				// Create a new redux store instance
 				const store = configureStore(preloadedState);
@@ -85,6 +85,20 @@ function renderFullPage( html, preloadedState ) {
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
 		<link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.grey-pink.min.css" />
 		<style>
+			a.mdl-card {
+				text-decoration: none;
+			}
+			.no-bottom-padding {
+				padding-bottom: 0;
+			}
+			.mdl-card__nomedia {
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+			.mdl-card__media {
+				overflow: hidden;
+				max-height: 250px;
+			}
 			.portfolio-header {
 				background-color: #f5f5f5;
 				border-bottom: 1px solid #ddd;
@@ -119,6 +133,7 @@ function renderFullPage( html, preloadedState ) {
 		<div id="app">${html}</div>
 		<script>
 			window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\x3c')};
+			console.log(window.__PRELOADED_STATE__);
 		</script>
 		<script src="/static/bundle.js"></script>
 	</body>

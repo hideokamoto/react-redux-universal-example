@@ -1,7 +1,7 @@
-var domain = 'http://localhost:3000/';
+let domain = 'http://localhost:3000/';
 module.exports = {
 	domain: domain,
-	api: 'http://api.wp-app.org/wp-json/',
+	api: 'http://ogijima-library.or.jp/wp-json/',
 	pages: {
 		root: domain,
 		about: domain + 'about',

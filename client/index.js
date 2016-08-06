@@ -10,7 +10,7 @@ import configureStore from '../common/store/configureStore';
 const preloadState = window.__PRELOADED_STATE__;
 
 const sample = {
-	postList: 'dummy params from client/index.js'
+	counter: 'dummy params from client/index.js'
 }
 import App from '../common/containers/App';
 import ClientRoot from './route';

@@ -4,7 +4,9 @@ import Main from '../components/Main';
 import * as CounterActions from '../actions';
 
 function mapStateToProps(state) {
-	return {};
+	return {
+		posts: state.postList
+	};
 }
 
 function mapDispatchToProps(dispatch) {
