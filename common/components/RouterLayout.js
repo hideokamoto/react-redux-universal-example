@@ -24,22 +24,24 @@ export default class RouterLayout extends Component {
 						</nav>
 					</div>
 				</header>
-				{this.props.children}
-				<div id='client'></div>
-				<footer className="mdl-mini-footer">
-					<div className="mdl-mini-footer__left-section">
-						<h2 className="mdl-logo">
-							{siteRoot.name}<br />
-							<small>{siteRoot.description}</small>
-						</h2>
-					</div>
-					<div className="mdl-mini-footer__right-section">
-						<ul className="mdl-mini-footer__link-list">
-							<li><a href="about">About</a></li>
-							<li><a href="contact">Contact</a></li>
-						</ul>
-					</div>
-				</footer>
+				<main clasName="mdl-layout__content">
+					{this.props.children}
+					<div id='client' className="mdl-grid portfolio-max-width"></div>
+					<footer className="mdl-mini-footer">
+						<div className="mdl-mini-footer__left-section">
+							<h2 className="mdl-logo">
+								{siteRoot.name}<br />
+								<small>{siteRoot.description}</small>
+							</h2>
+						</div>
+						<div className="mdl-mini-footer__right-section">
+							<ul className="mdl-mini-footer__link-list">
+								<li><a href="about">About</a></li>
+								<li><a href="contact">Contact</a></li>
+							</ul>
+						</div>
+					</footer>
+				</main>
 			</div>
 		)
 	}
