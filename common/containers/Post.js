@@ -3,7 +3,7 @@ import Post from '../components/Post';
 
 function mapStateToProps( state ) {
 	return {
-
+		posts: state.postList
 	};
 }
 
