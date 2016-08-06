@@ -14,10 +14,10 @@ export default class PostExcerpt extends Component {
 					<h2 className="mdl-card__title-text">{post.title.rendered}</h2>
 				</div>
 				{images}
-				<div className="mdl-card__supporting-text no-bottom-padding">
+				<div className="mdl-card__supporting-text no-bottom-padding content_text">
 					<span>Posted {date}</span>
 				</div>
-				<div className="mdl-card__supporting-text" dangerouslySetInnerHTML={{__html:content}}></div>
+				<div className="mdl-card__supporting-text content_text" dangerouslySetInnerHTML={{__html:content}}></div>
 			</div>
 		)
 	}

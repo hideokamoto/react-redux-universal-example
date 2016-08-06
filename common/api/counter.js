@@ -47,7 +47,7 @@ function fetchPostList( callback ) {
 }
 
 function fetchPost( callback, slug ) {
-	var api =  conf.api + 'wp/v2/posts?slug=' + slug;
+	var api =  conf.api + 'wp/v2/posts?slug=' + slug + '&_embed';
 	fetchData(api)
 	  .then( res => {
 		  if ( res.status >= 400 ) {

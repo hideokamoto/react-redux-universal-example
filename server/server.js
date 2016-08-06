@@ -103,6 +103,10 @@ function renderFullPage( html, preloadedState ) {
 				overflow: hidden;
 				max-height: 250px;
 			}
+			.content_text {
+				max-width: 700px;
+				margin: 0 auto;
+			}
 			.portfolio-header {
 				background-color: #f5f5f5;
 				border-bottom: 1px solid #ddd;
