@@ -1,8 +1,16 @@
 import React , { Component } from 'react';
+import conf from '../config';
 
 export default class RouterLayout extends Component {
 	constructor(props,context) {
 		super(props);
+		this.state = {
+			path: {
+				root: conf.domain,
+				about: conf.domain + 'about',
+				contact: conf.domain + 'contact'
+			}
+		};
 	}
 
 	render() {
@@ -11,16 +19,16 @@ export default class RouterLayout extends Component {
 			<div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 				<header className="mdl-layout__header mdl-layout__header--waterfall portfolio-header">
 					<h1 className="mdl-layout__header-row portfolio-logo-row">
-						<span className="mdl-layout__title">
+						<a className="mdl-layout__title" href={this.state.path.root}>
 							<div className="portfolio-logo"></div>
 							<span className="mdl-layout__title">{siteRoot.name}</span>
-						</span>
+						</a>
 					</h1>
 					<div className="mdl-layout__header-row portfolio-navigation-row mdl-layout--large-screen-only">
 						<nav className="mdl-navigation mdl-typography--body-1-force-preferred-font">
-							<a className="mdl-navigation__link is-active" href="/">TOP</a>
-							<a className="mdl-navigation__link" href="about">About</a>
-							<a className="mdl-navigation__link" href="contact">Contact</a>
+							<a className="mdl-navigation__link is-active" href={this.state.path.root}>TOP</a>
+							<a className="mdl-navigation__link" href={this.state.path.about}>About</a>
+							<a className="mdl-navigation__link" href={this.state.path.contact}>Contact</a>
 						</nav>
 					</div>
 				</header>
@@ -36,8 +44,8 @@ export default class RouterLayout extends Component {
 						</div>
 						<div className="mdl-mini-footer__right-section">
 							<ul className="mdl-mini-footer__link-list">
-								<li><a href="about">About</a></li>
-								<li><a href="contact">Contact</a></li>
+								<li><a href={this.state.path.about}>About</a></li>
+								<li><a href={this.state.path.contact}>Contact</a></li>
 							</ul>
 						</div>
 					</footer>
