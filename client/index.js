@@ -20,7 +20,7 @@ const store = configureStore(mergedState);
 const rootElement = document.getElementById('client');
 var history = syncHistoryWithStore(browserHistory, store);
 
-match({history, ClientRoot}, (error,redirectLocation,renderProps) => {
+match({ ClientRoot, history }, (error,redirectLocation,renderProps) => {
 	render(
 		<Provider store={store}>
 			<Router history={hashHistory} routes={ClientRoot}>
