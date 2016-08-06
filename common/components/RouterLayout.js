@@ -27,7 +27,6 @@ export default class RouterLayout extends Component {
 				</header>
 				<main clasName="mdl-layout__content">
 					{this.props.children}
-					<div id='client' className="mdl-grid portfolio-max-width"></div>
 					<footer className="mdl-mini-footer">
 						<div className="mdl-mini-footer__left-section">
 							<h2 className="mdl-logo">
