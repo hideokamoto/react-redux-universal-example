@@ -14,11 +14,24 @@ export default class RouterLayout extends Component {
 			<div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 				<Helmet
 					title={siteRoot.name}
-					titleTemplate={titleTemplate} 
+					titleTemplate={titleTemplate}
 					meta={[
 						{property: 'og:title', content: siteRoot.name},
 						{property: 'description', content: siteRoot.description},
 					]}
+					script={[{
+						"type": "application/ld+json",
+						"innerHTML": `{
+							"@context": 'http://schema.org',
+							"@type": 'WebSite',
+							"url": "${conf.domain}",
+							"potentialAction": {
+								"@type": 'SearchAction',
+								"target": "${conf.domain}?s={query}",
+								"query-input": 'required'
+							}
+						}`
+					}]}
 				/>
 				<header className="mdl-layout__header mdl-layout__header--waterfall portfolio-header">
 					<h1 className="mdl-layout__header-row portfolio-logo-row">

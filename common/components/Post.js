@@ -12,6 +12,7 @@ export default class Post extends Component {
 		let post = posts[0];
 		let postContent = <PostContent post={post} key={post.id} />;
 		let excerpt = post.excerpt.rendered.replace(/(<([^>]+)>)/ig,"");
+		let content = post.content.rendered.replace(/(<([^>]+)>)/ig,"");
 		return(
 			<div className="mdl-grid portfolio-max-width">
 				<Helmet
@@ -20,6 +21,15 @@ export default class Post extends Component {
 						{property: 'og:title', content: post.title.rendered},
 						{property: 'description', content: excerpt}
 					]}
+					script={[{
+						"type": "application/ld+json",
+						"innerHTML": `{
+							"@context": 'http://schema.org',
+							"@type": 'Article',
+							"name": ${post.title.rendered},
+							"articleBody": "${content}"
+						}`
+					}]}
 				/>
 				{postContent}
 				<div id='client'></div>

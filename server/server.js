@@ -139,7 +139,7 @@ function renderFullPage( html, preloadedState, head ) {
 			}
 		</style>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-		<title>Redux Universal Example</title>
+		${head.script}
 	</head>
 	<body>
 		<div id="app">${html}</div>
