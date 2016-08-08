@@ -8,6 +8,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack.config';
 
 import React from 'react';
+import Helmet from 'react-helmet';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { match, RouterContext } from 'react-router';
@@ -62,12 +63,13 @@ function handleRender( req, res ) {
 						<RouterContext {...renderProps} />
 					</Provider>
 				);
+				let head = Helmet.rewind();
 
 				// Grab the initial state from out Refux store
 				const finalState = store.getState();
 
 				// Send the rendered page back to the client
-				res.send( renderFullPage( html, finalState ));
+				res.send( renderFullPage( html, finalState, head ) );
 			});
 		} else {
 			res.status(404).send('not found');
@@ -75,13 +77,15 @@ function handleRender( req, res ) {
 	});
 };
 
-function renderFullPage( html, preloadedState ) {
+function renderFullPage( html, preloadedState, head ) {
 	return `
 	<!docutype html>
 	<html>
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+		${head.title}
+		${head.meta}
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
 		<link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.grey-pink.min.css" />
 		<style>

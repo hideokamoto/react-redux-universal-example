@@ -1,5 +1,6 @@
 import React , { Component } from 'react';
 import conf from '../config';
+import Helmet from 'react-helmet';
 
 export default class RouterLayout extends Component {
 	constructor(props,context) {
@@ -8,8 +9,17 @@ export default class RouterLayout extends Component {
 
 	render() {
 		const { siteRoot } = this.props;
+		let titleTemplate = "%s | " + siteRoot.name;
 		return (
 			<div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+				<Helmet
+					title={siteRoot.name}
+					titleTemplate={titleTemplate} 
+					meta={[
+						{property: 'og:title', content: siteRoot.name},
+						{property: 'description', content: siteRoot.description},
+					]}
+				/>
 				<header className="mdl-layout__header mdl-layout__header--waterfall portfolio-header">
 					<h1 className="mdl-layout__header-row portfolio-logo-row">
 						<a className="mdl-layout__title" href={conf.pages.root}>
