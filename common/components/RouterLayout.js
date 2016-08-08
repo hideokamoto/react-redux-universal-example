@@ -13,12 +13,72 @@ export default class RouterLayout extends Component {
 		return (
 			<div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 				<Helmet
+					htmlAttributes={{"lang": "ja"}}
+					link={[
+						{"rel": "stylesheet", "href": "https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"},
+						{"rel": "stylesheet", "href": "https://code.getmdl.io/1.1.3/material.grey-pink.min.css"},
+						{"rel": "stylesheet", "href": "https://fonts.googleapis.com/icon?family=Material+Icons"}
+					]}
 					title={siteRoot.name}
 					titleTemplate={titleTemplate}
+					defaultTitle={siteRoot.name}
 					meta={[
 						{property: 'og:title', content: siteRoot.name},
 						{property: 'description', content: siteRoot.description},
+						{property: 'charset', content: 'utf-8'},
+						{property: 'viewport', content: "width=device-width, initial-scale=1.0, minimum-scale=1.0"}
 					]}
+					style={[{
+						"cssText": `
+							img {
+								max-width: 100%;
+								height: auto;
+							}
+							a.mdl-card {
+								text-decoration: none;
+							}
+							.no-bottom-padding {
+								padding-bottom: 0;
+							}
+							.mdl-card__nomedia {
+								margin-top: 0;
+								margin-bottom: 0;
+							}
+							.mdl-card__media {
+								overflow: hidden;
+								max-height: 250px;
+							}
+							.content_text {
+								max-width: 700px;
+								margin: 0 auto;
+							}
+							.portfolio-header {
+								background-color: #f5f5f5;
+								border-bottom: 1px solid #ddd;
+							}
+							.portfolio-header .mdl-layout__header-row {
+								padding: 0;
+								-webkit-justify-content: center;
+									-ms-flex-pack: center;
+									justify-content: center;
+							}
+							.portfolio-navigation-row  .mdl-navigation {
+								text-align: center;
+								max-width: 900px;
+								width: 100%;
+							}
+							.portfolio-navigation-row .mdl-navigation__link {
+								-webkit-flex: 1;
+									-ms-flex: 1;
+									flex: 1;
+								line-height: 42px;
+							}
+							.portfolio-max-width {
+								max-width: 1024px;
+								margin: auto;
+							}
+						`
+					}]}
 					script={[{
 						"type": "application/ld+json",
 						"innerHTML": `{

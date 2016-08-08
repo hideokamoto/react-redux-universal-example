@@ -80,65 +80,12 @@ function handleRender( req, res ) {
 function renderFullPage( html, preloadedState, head ) {
 	return `
 	<!docutype html>
-	<html>
+	<html ${head.htmlAttributes}>
 	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 		${head.title}
 		${head.meta}
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-		<link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.grey-pink.min.css" />
-		<style>
-			img {
-				max-width: 100%;
-				height: auto;
-			}
-			a.mdl-card {
-				text-decoration: none;
-			}
-			.no-bottom-padding {
-				padding-bottom: 0;
-			}
-			.mdl-card__nomedia {
-				margin-top: 0;
-				margin-bottom: 0;
-			}
-			.mdl-card__media {
-				overflow: hidden;
-				max-height: 250px;
-			}
-			.content_text {
-				max-width: 700px;
-				margin: 0 auto;
-			}
-			.portfolio-header {
-				background-color: #f5f5f5;
-				border-bottom: 1px solid #ddd;
-			}
-			.portfolio-header .mdl-layout__header-row {
-				padding: 0;
-				-webkit-justify-content: center;
-					-ms-flex-pack: center;
-					justify-content: center;
-			}
-			.portfolio-navigation-row  .mdl-navigation {
-				text-align: center;
-				max-width: 900px;
-				width: 100%;
-			}
-
-			.portfolio-navigation-row .mdl-navigation__link {
-				-webkit-flex: 1;
-					-ms-flex: 1;
-					flex: 1;
-				line-height: 42px;
-			}
-			.portfolio-max-width {
-				max-width: 1024px;
-				margin: auto;
-			}
-		</style>
-		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		${head.link}
+		${head.style}
 		${head.script}
 	</head>
 	<body>
