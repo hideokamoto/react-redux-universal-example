@@ -8,6 +8,7 @@ import Post from '../common/containers/Post';
 export default (
 	<Route path='/' component={RouterLayout}>
 		<Route path='/:slug' component={Post} />
+		<Route path='/page/:pageNo' component={Main} />
 		<IndexRoute component={Main} />
 	</Route>
 )

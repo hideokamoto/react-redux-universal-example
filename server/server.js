@@ -51,8 +51,9 @@ function handleRender( req, res ) {
 				const counter = parseInt(params.counter,10) || apiResult || 0;
 				const postList = apiResult.posts;
 				const siteRoot = apiResult.siteRoot;
+				const pageNo = apiResult.pageNo;
 				// Compile an initial state
-				const preloadedState = { siteRoot, postList };
+				const preloadedState = { siteRoot, postList, pageNo };
 
 				// Create a new redux store instance
 				const store = configureStore(preloadedState);
@@ -94,7 +95,7 @@ function renderFullPage( html, preloadedState, head ) {
 			window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\x3c')};
 			console.log(window.__PRELOADED_STATE__);
 		</script>
-		<script src="/static/bundle.js"></script>
+		<script _src="/static/bundle.js"></script>
 	</body>
 	</html>
 	`

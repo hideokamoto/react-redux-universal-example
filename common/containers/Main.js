@@ -5,7 +5,8 @@ import * as CounterActions from '../actions';
 
 function mapStateToProps(state) {
 	return {
-		posts: state.postList
+		posts: state.postList,
+		pageNo: parseInt( state.pageNo, 10 )
 	};
 }
 

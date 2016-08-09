@@ -12,15 +12,22 @@ var returnData = [];
 export function fetchApi( params, callback ) {
 	if ( ! params.slug ) {
 		console.log('this is root page');
-		fetchPostList( callback );
+		if ( ! params.pageNo ) {
+			params.pageNo = 0;
+		}
+		fetchPostList( callback, params.pageNo );
 	} else {
 		console.log('this is child page');
 		fetchPost( callback, params.slug );
 	}
 }
 
-function fetchPostList( callback ) {
-	var api =  conf.api + 'wp/v2/posts' + '?_embed';
+function fetchPostList( callback, pageNo = 0 ) {
+	var api =  conf.api + 'wp/v2/posts?';
+	if ( pageNo ) {
+		api += 'page=' + pageNo;
+	}
+	api += '&_embed';
 	fetchData(api)
 	  .then( res => {
 		  if ( res.status >= 400 ) {
@@ -34,13 +41,15 @@ function fetchPostList( callback ) {
 		  	throw new Error('Page not found');
 		  }
 		  returnData = {
-			  posts: data
+			  posts: data,
+			  pageNo: pageNo
 		  };
 		  fetchRoot( callback, returnData );
 	  })
 	  .catch( error => {
 		  returnData = {
-			  posts: error
+			  posts: error,
+			  pageNo: pageNo
 		  }
 		  fetchRoot( callback, returnData );
 	  });
