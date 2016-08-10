@@ -21,7 +21,8 @@ export function fetchApi( params, query, callback ) {
 function fetchPostList( callback, pageNo = 0, query = { s: false } ) {
 	var api =  conf.api + 'wp/v2/posts?';
 	if ( pageNo ) {
-		api += 'page=' + pageNo;
+		var no = parseInt( pageNo ) + 1;
+		api += 'page=' + no;
 	}
 	if ( query.s ) {
 		api += '&search=' + query.s;
