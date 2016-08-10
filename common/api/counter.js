@@ -9,23 +9,26 @@ function fetchData( api ) {
 }
 
 var returnData = [];
-export function fetchApi( params, callback ) {
+export function fetchApi( params, query, callback ) {
 	if ( ! params.slug ) {
 		console.log('this is root page');
 		if ( ! params.pageNo ) {
 			params.pageNo = 0;
 		}
-		fetchPostList( callback, params.pageNo );
+		fetchPostList( callback, params.pageNo, query );
 	} else {
 		console.log('this is child page');
 		fetchPost( callback, params.slug );
 	}
 }
 
-function fetchPostList( callback, pageNo = 0 ) {
+function fetchPostList( callback, pageNo = 0, query = { s: false } ) {
 	var api =  conf.api + 'wp/v2/posts?';
 	if ( pageNo ) {
 		api += 'page=' + pageNo;
+	}
+	if ( query.s ) {
+		api += '&search=' + query.s;
 	}
 	api += '&_embed';
 	fetchData(api)
@@ -42,14 +45,16 @@ function fetchPostList( callback, pageNo = 0 ) {
 		  }
 		  returnData = {
 			  posts: data,
-			  pageNo: pageNo
+			  pageNo: pageNo,
+			  search: query.s
 		  };
 		  fetchRoot( callback, returnData );
 	  })
 	  .catch( error => {
 		  returnData = {
 			  posts: error,
-			  pageNo: pageNo
+			  pageNo: pageNo,
+			  search: query.s
 		  }
 		  fetchRoot( callback, returnData );
 	  });

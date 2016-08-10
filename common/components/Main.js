@@ -6,10 +6,10 @@ import PostError from './PostError';
 
 class Main extends Component {
 	render() {
-		const { posts, pageNo } = this.props;
+		const { posts, pageNo, search } = this.props;
 		let prev = pageNo - 1;
 		let next = pageNo + 1;
-		const prevLink = <PrevLink pageNo={prev} />;
+		const prevLink = <PrevLink pageNo={prev} search={search} />;
 
 		if ( posts instanceof Error ) {
 			var postList = <PostError errorText="Post Not Found" />;
@@ -18,7 +18,7 @@ class Main extends Component {
 			var postList = posts.map( (post) => {
 				return <PostExcerpt post={post} key={post.id} />;
 			});
-			var nextLink = <NextLink pageNo={next} />;
+			var nextLink = <NextLink pageNo={next} search={search} />;
 		}
 		return (
 			<div className="mdl-grid portfolio-max-width">

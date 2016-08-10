@@ -10,6 +10,9 @@ export class PrevLink extends Component {
 			} else {
 				var link = conf.domain + "page/" + this.props.pageNo;
 			}
+			if ( this.props.search ) {
+				link += "?s=" + this.props.search;
+			}
 			var linkText = "Previous";
 		} else {
 			var link = false;
@@ -25,6 +28,9 @@ export class NextLink extends Component {
 	render() {
 		if ( this.props.pageNo >= 0) {
 			var link = conf.domain + "page/" + this.props.pageNo;
+			if ( this.props.search && this.props.search[0] ) {
+				link += "?s=" + this.props.search;
+			}
 			var linkText = "Next";
 		} else {
 			var link = false;

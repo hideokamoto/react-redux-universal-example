@@ -3,6 +3,7 @@ import RouterLayout from '../components/RouterLayout';
 
 function mapStateToProps(state) {
 	return {
+		search: state.search,
 		siteRoot: state.siteRoot
 	};
 }

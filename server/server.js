@@ -39,21 +39,21 @@ function handleRender( req, res ) {
 		} else if (redirectLocation) {
 			res.redirect(302, redirectLocation.pathname + redirectLocation.search);
 		} else if (renderProps){
+			const params = qs.parse(req.query);
 			// Query out mock API asynchronously
-			fetchApi( renderProps.params, apiResult => {
+			fetchApi( renderProps.params, params, apiResult => {
 				if ( apiResult.posts instanceof Error ) {
 					res.status(404);
 				} else {
 					res.status(200);
 				}
 				// Read the counter from the request, if provided
-				const params = qs.parse(req.query);
-				const counter = parseInt(params.counter,10) || apiResult || 0;
 				const postList = apiResult.posts;
 				const siteRoot = apiResult.siteRoot;
 				const pageNo = apiResult.pageNo;
+				const search = apiResult.search;
 				// Compile an initial state
-				const preloadedState = { siteRoot, postList, pageNo };
+				const preloadedState = { siteRoot, postList, pageNo, search };
 
 				// Create a new redux store instance
 				const store = configureStore(preloadedState);

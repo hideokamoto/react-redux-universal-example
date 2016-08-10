@@ -8,7 +8,7 @@ export default class RouterLayout extends Component {
 	}
 
 	render() {
-		const { siteRoot } = this.props;
+		const { siteRoot, search } = this.props;
 		let titleTemplate = "%s | " + siteRoot.name;
 		return (
 			<div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -105,6 +105,11 @@ export default class RouterLayout extends Component {
 							<a className="mdl-navigation__link is-active" href={conf.pages.root}>TOP</a>
 							<a className="mdl-navigation__link" href={conf.pages.about}>About</a>
 							<a className="mdl-navigation__link" href={conf.pages.contribute}>Contribution</a>
+							<form action={conf.pages.root}>
+								<div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded">
+									<input className="mdl-textfield__input" type="text" placeholder="search keyword" name='s' defaultValue={search}/>
+								</div>
+							</form>
 						</nav>
 					</div>
 				</header>
