@@ -104,7 +104,7 @@ export default class RouterLayout extends Component {
 						<nav className="mdl-navigation mdl-typography--body-1-force-preferred-font">
 							<a className="mdl-navigation__link is-active" href={conf.pages.root}>TOP</a>
 							<a className="mdl-navigation__link" href={conf.pages.about}>About</a>
-							<a className="mdl-navigation__link" href={conf.pages.contact}>Contact</a>
+							<a className="mdl-navigation__link" href={conf.pages.contribute}>Contribution</a>
 						</nav>
 					</div>
 				</header>
@@ -120,7 +120,6 @@ export default class RouterLayout extends Component {
 						<div className="mdl-mini-footer__right-section">
 							<ul className="mdl-mini-footer__link-list">
 								<li><a href={conf.pages.about}>About</a></li>
-								<li><a href={conf.pages.contact}>Contact</a></li>
 							</ul>
 						</div>
 					</footer>
