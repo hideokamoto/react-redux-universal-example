@@ -1,10 +1,11 @@
 let domain = 'http://localhost:3000/';
 module.exports = {
 	domain: domain,
-	api: 'http://ogijima-library.or.jp/wp-json/',
+	api: 'http://wp-kyoto.net/wp-json/',
 	pages: {
 		root: domain,
 		about: domain + 'about',
-		contact: domain + 'contact'
+		contact: domain + 'contact',
+		contribute: domain + 'contributing-to-wordpress'
 	}
 };
