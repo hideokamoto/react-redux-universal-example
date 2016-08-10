@@ -56,7 +56,13 @@ function fetchPostList( callback, pageNo = 0 ) {
 }
 
 function fetchPost( callback, slug ) {
-	var api =  conf.api + 'wp/v2/posts?slug=' + slug + '&_embed';
+	var path = '';
+	if ( 'about' === slug || 'contributing-to-wordpress' === slug ) {
+		path = 'pages';
+	} else {
+		path = 'posts';
+	}
+	var api =  conf.api + 'wp/v2/' + path + '?slug=' + slug + '&_embed';
 	fetchData(api)
 	  .then( res => {
 		  if ( res.status >= 400 ) {
