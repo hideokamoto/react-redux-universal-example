@@ -12,7 +12,6 @@ const preloadState = window.__PRELOADED_STATE__;
 const sample = {
 	counter: 'dummy params from client/index.js'
 }
-import App from '../common/containers/App';
 import ClientRoot from './route';
 
 const mergedState = Object.assign( preloadState, sample );

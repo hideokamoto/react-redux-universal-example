@@ -2,7 +2,6 @@ import React from 'react';
 import { Router, Route, IndexRoute } from 'react-router';
 
 import ClientLayout from '../common/containers/ClientLayout';
-import App from '../common/containers/App';
 import Post from '../common/containers/Post';
 
 export default (

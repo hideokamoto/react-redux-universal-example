@@ -1,9 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import conf from '../config';
 
-function getRandomInt(min,max) {
-	return Math.floor( Math.random() * (max - min )) + min;
-}
+
 function fetchData( api ) {
 	return fetch(api);
 }
@@ -11,13 +9,11 @@ function fetchData( api ) {
 var returnData = [];
 export function fetchApi( params, query, callback ) {
 	if ( ! params.slug ) {
-		console.log('this is root page');
 		if ( ! params.pageNo ) {
 			params.pageNo = 0;
 		}
 		fetchPostList( callback, params.pageNo, query );
 	} else {
-		console.log('this is child page');
 		fetchPost( callback, params.slug );
 	}
 }
