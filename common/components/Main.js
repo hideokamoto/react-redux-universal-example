@@ -1,42 +1,8 @@
 import React, { Component } from 'react';
 import conf from '../config';
 import PostExcerpt from './PostExcerpt';
-import PageNav from './PageNav';
+import { PageNav, PrevLink, NextLink } from './PageNav';
 import PostError from './PostError';
-
-class PrevLink extends Component {
-	render() {
-		if ( this.props.pageNo >= 0) {
-			if ( this.props.pageNo == 0) {
-				var link = conf.domain +  "";
-			} else {
-				var link = conf.domain + "page/" + this.props.pageNo;
-			}
-			var linkText = "Previous";
-		} else {
-			var link = false;
-			var linkText = "";
-		}
-		return (
-			<PageNav linkText={linkText} link={link} />
-		);
-	}
-}
-
-class NextLink extends Component {
-	render() {
-		if ( this.props.pageNo >= 0) {
-			var link = conf.domain + "page/" + this.props.pageNo;
-			var linkText = "Next";
-		} else {
-			var link = false;
-			var linkText = "";
-		}
-		return (
-			<PageNav linkText={linkText} link={link} />
-		);
-	}
-}
 
 class Main extends Component {
 	render() {

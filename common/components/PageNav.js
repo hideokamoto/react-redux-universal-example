@@ -1,7 +1,42 @@
 import React, { Component } from 'react';
 import conf from '../config';
 
-export default class PageNav extends Component {
+
+export class PrevLink extends Component {
+	render() {
+		if ( this.props.pageNo >= 0) {
+			if ( this.props.pageNo == 0) {
+				var link = conf.domain +  "";
+			} else {
+				var link = conf.domain + "page/" + this.props.pageNo;
+			}
+			var linkText = "Previous";
+		} else {
+			var link = false;
+			var linkText = "";
+		}
+		return (
+			<PageNav linkText={linkText} link={link} />
+		);
+	}
+}
+
+export class NextLink extends Component {
+	render() {
+		if ( this.props.pageNo >= 0) {
+			var link = conf.domain + "page/" + this.props.pageNo;
+			var linkText = "Next";
+		} else {
+			var link = false;
+			var linkText = "";
+		}
+		return (
+			<PageNav linkText={linkText} link={link} />
+		);
+	}
+}
+
+export class PageNav extends Component {
 	render() {
 		if ( this.props.link ) {
 			return (
